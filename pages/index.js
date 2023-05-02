@@ -7,11 +7,11 @@ import Header from '@/components/Header';
 import Featured from '@/components/Featured';
 import NewProducts from '@/components/NewProducts';
 
-const Home = ({ product }) => {
+const Home = ({ featuredProduct, newProduct }) => {
   return (
     <div>
       <Header />
-      <Featured product={product} />
+      <Featured product={featuredProduct} newProduct={newProduct} />
       <NewProducts />
     </div>
   );
@@ -21,10 +21,14 @@ export const getServerSideProps = async () => {
   await MongooseConnect();
 
   const featuredProductId = '644a8dff10d9908e1cb6183d';
-  const product = await Product.findById(featuredProductId);
+  const featuredProduct = await Product.findById(featuredProductId);
+  const newProduct = await Product.find({}, null, { sort: { _id: -1 }, limit: 10 });
 
   return {
-    props: { product: JSON.parse(JSON.stringify(product)) },
+    props: {
+      featuredProduct: JSON.parse(JSON.stringify(featuredProduct)),
+      newProduct: JSON.parse(JSON.stringify(newProduct)),
+    },
   };
 };
 
