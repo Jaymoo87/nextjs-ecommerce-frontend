@@ -43,9 +43,9 @@ const Col = styled.div`
 `;
 
 const Featured = ({ product }) => {
-  const { setCartProducts } = useContext(CartContext);
+  const { addProduct } = useContext(CartContext);
   const addFeaturedToCart = () => {
-    setCartProducts((prev) => [...prev, product._id]);
+    addProduct(product._id);
   };
 
   return (

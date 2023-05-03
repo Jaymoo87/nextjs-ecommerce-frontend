@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 
 import MainBtn from './MainBtn';
@@ -6,6 +6,7 @@ import CartIcon from './icons/CartIcon';
 
 import { primary, darkBG } from '@/lib/colors';
 import Link from 'next/link';
+import { CartContext } from './CartContext';
 
 const ProductWrapper = styled.div``;
 
@@ -48,6 +49,7 @@ const ProductInfoBox = styled.div`
 `;
 
 const ProductBox = ({ _id, description, price, title, images }) => {
+  const { addProduct } = useContext(CartContext);
   const url = `/products/${_id}`;
 
   return (
@@ -58,7 +60,7 @@ const ProductBox = ({ _id, description, price, title, images }) => {
       </Box>{' '}
       <ProductInfoBox>
         ${price}{' '}
-        <MainBtn size={'sm'}>
+        <MainBtn onClick={() => addProduct(_id)} size={'sm'}>
           <CartIcon /> Buy Now
         </MainBtn>
       </ProductInfoBox>
