@@ -7,12 +7,12 @@ import Header from '@/components/Header';
 import Featured from '@/components/Featured';
 import NewProducts from '@/components/NewProducts';
 
-const Home = ({ featuredProduct, newProduct }) => {
+const Home = ({ featuredProduct, newProducts }) => {
   return (
     <div>
       <Header />
-      <Featured product={featuredProduct} newProduct={newProduct} />
-      <NewProducts />
+      <Featured product={featuredProduct} />
+      <NewProducts products={newProducts} />
     </div>
   );
 };
@@ -22,12 +22,12 @@ export const getServerSideProps = async () => {
 
   const featuredProductId = '644a8dff10d9908e1cb6183d';
   const featuredProduct = await Product.findById(featuredProductId);
-  const newProduct = await Product.find({}, null, { sort: { _id: -1 }, limit: 10 });
+  const newProducts = await Product.find({}, null, { sort: { _id: -1 }, limit: 10 });
 
   return {
     props: {
       featuredProduct: JSON.parse(JSON.stringify(featuredProduct)),
-      newProduct: JSON.parse(JSON.stringify(newProduct)),
+      newProducts: JSON.parse(JSON.stringify(newProducts)),
     },
   };
 };
