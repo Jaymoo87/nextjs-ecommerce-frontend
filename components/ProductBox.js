@@ -1,13 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
+
 import MainBtn from './MainBtn';
 import CartIcon from './icons/CartIcon';
 
+import { primary, darkBG } from '@/lib/colors';
+import Link from 'next/link';
+
 const ProductWrapper = styled.div``;
 
-const Box = styled.div`
-  box-shadow: #001524 5px 5px 15px;
-  background-color: #ffecd1;
+const Box = styled(Link)`
+  box-shadow: ${darkBG} 5px 5px 15px;
+  background-color: white;
   padding: 20px;
   height: 120px;
   text-align: center;
@@ -22,34 +26,39 @@ const Box = styled.div`
   }
 `;
 
-const Title = styled.h2`
-  text-align: center;
-  color: #ffecd1;
-  font-weight: normal;
-  font-size: 0.9rem;
-  margin: 0 0 5px 0;
+const Title = styled(Link)`
+  display: flex;
+  justify-content: center;
+  color: ${primary};
+  font-weight: light;
+  font-size: 0.8rem;
+  margin-bottom: 5px;
+  text-decoration: none;
 `;
 
 const ProductInfoBox = styled.div`
-  color: #ffecd1;
+  color: ${primary};
   margin-top: 10px;
   align-items: center;
   display: grid;
   grid-template-columns: 1fr 2fr;
   max-width: 100px;
   margin-left: 20px;
+  font-weight: 500;
 `;
 
 const ProductBox = ({ _id, description, price, title, images }) => {
+  const url = `/products/${_id}`;
+
   return (
     <ProductWrapper>
-      <Title> {title}</Title>
-      <Box>
+      <Title href={url}> {title}</Title>
+      <Box href={url}>
         <img src={images[0]} alt="" />
       </Box>{' '}
       <ProductInfoBox>
         ${price}{' '}
-        <MainBtn>
+        <MainBtn size={'sm'}>
           <CartIcon /> Buy Now
         </MainBtn>
       </ProductInfoBox>

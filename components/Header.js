@@ -1,16 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import Link from 'next/link';
 import styled from 'styled-components';
 
 import Center from './Center';
+import { lightBG, primary, darkBG } from '@/lib/colors';
+import { CartContext } from './CartContext';
 
 const SHeader = styled.header`
-  background-color: #15616d;
+  background-color: ${lightBG};
 `;
 
 const Logo = styled(Link)`
-  color: #fff;
+  color: ${primary};
   text-decoration: none;
 `;
 
@@ -21,7 +23,7 @@ const SWrapper = styled.div`
 `;
 
 const SLink = styled(Link)`
-  color: #aaa;
+  color: ${primary};
   text-decoration: none;
 `;
 
@@ -31,6 +33,8 @@ const SNav = styled.nav`
 `;
 
 const Header = () => {
+  const { cartProducts } = useContext(CartContext);
+
   return (
     <SHeader>
       <Center>
@@ -41,7 +45,7 @@ const Header = () => {
             <SLink href={'/products'}>All Products</SLink>
             <SLink href={'/categories'}>Categories</SLink>
             <SLink href={'/account'}>Account</SLink>
-            <SLink href={'/cart'}>My Cart (0)</SLink>
+            <SLink href={'/cart'}>My Cart ({cartProducts.length})</SLink>
           </SNav>
         </SWrapper>
       </Center>

@@ -1,23 +1,26 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import Center from './Center';
 import styled from 'styled-components';
 import MainBtn from './MainBtn';
 import LinkButton from './LinkButton';
 
+import { primary, darkBG, lightBG } from '@/lib/colors';
+import { CartContext } from './CartContext';
+
 const BG = styled.div`
-  background-color: #001524;
-  color: #fff;
+  background-color: ${darkBG};
+  color: ${primary};
   padding: 50px 0;
 `;
 
 const Title = styled.h1`
   margin: 0;
-  font-weight: normal;
+  font-weight: bold;
 `;
 
 const DescP = styled.p`
-  color: #aaa;
+  color: ${primary};
   font-size: 0.8rem;
   margin-bottom: 40px;
 `;
@@ -30,6 +33,7 @@ const ColWrapper = styled.div`
   img {
     max-width: 100%;
     border-radius: 2rem;
+    box-shadow: ${lightBG} 5px 10px 100px;
   }
 `;
 
@@ -39,6 +43,11 @@ const Col = styled.div`
 `;
 
 const Featured = ({ product }) => {
+  const { setCartProducts } = useContext(CartContext);
+  const addFeaturedToCart = () => {
+    setCartProducts((prev) => [...prev, product._id]);
+  };
+
   return (
     <BG>
       <Center>
@@ -47,7 +56,7 @@ const Featured = ({ product }) => {
             <div>
               <Title>{product.title}</Title>
               <DescP>{product.description}</DescP>
-              <MainBtn size={'l'}>
+              <MainBtn onClick={addFeaturedToCart} size={'l'}>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
                   <path
                     fillRule="evenodd"
