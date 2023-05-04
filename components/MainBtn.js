@@ -21,6 +21,12 @@ export const ButtonStyle = css`
   }
 
   ${(props) =>
+    props.block &&
+    css`
+      display: block;
+    `}
+
+  ${(props) =>
     props.cyan &&
     css`
       background-color: ${lightBG};
