@@ -1,4 +1,4 @@
-import { darkText } from '@/lib/colors';
+import { lightBG, mutedText, primary } from '@/lib/colors';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -8,7 +8,12 @@ const STable = styled.table`
   th {
     text-align: left;
     text-transform: uppercase;
-    color: ${darkText};
+    color: ${mutedText};
+    font-weight: 600;
+    font-size: 0.75rem;
+  }
+  td {
+    border-top: 1px solid ${lightBG};
   }
 `;
 

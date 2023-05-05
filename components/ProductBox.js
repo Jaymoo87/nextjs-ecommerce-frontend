@@ -1,14 +1,16 @@
 import React, { useContext } from 'react';
+import Link from 'next/link';
 import styled from 'styled-components';
 
 import MainBtn from './MainBtn';
 import CartIcon from './icons/CartIcon';
 
 import { primary, darkBG } from '@/lib/colors';
-import Link from 'next/link';
 import { CartContext } from './CartContext';
 
-const ProductWrapper = styled.div``;
+const ProductWrapper = styled.div`
+  background-color: white;
+`;
 
 const Box = styled(Link)`
   box-shadow: ${darkBG} 5px 5px 15px;
