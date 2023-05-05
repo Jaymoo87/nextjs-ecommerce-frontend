@@ -1,17 +1,19 @@
 import { MongooseConnect } from '@/lib/mongoose';
 import { Order } from '@/models/Order';
 import { Product } from '@/models/Product';
+import Stripe from 'stripe';
 
 export default async function handler(req, res) {
+  const stripe = new Stripe(process.env.STRIPE_SK);
   await MongooseConnect();
 
   if (req.method !== 'POST') {
     res.json('Wrong API Request');
     return;
   }
-  const { name, email, city, postalCode, streetAddress, country, products } = req.body;
+  const { name, email, city, postalCode, streetAddress, country, cartProducts } = req.body;
 
-  const productIds = products.split(',');
+  const productIds = cartProducts;
   const uniqueIds = [...new Set(productIds)];
   const productsInfo = await Product.find({ _id: uniqueIds });
 
@@ -26,13 +28,13 @@ export default async function handler(req, res) {
         price_data: {
           currency: 'USD',
           product_data: { name: info.title },
-          unit_amount: quantity * info.price,
+          unit_amount: quantity * info.price * 100,
         },
       });
     }
   }
 
-  const OrderInfo = Order.create({
+  const OrderInfo = await Order.create({
     line_items,
     name,
     email,
@@ -43,5 +45,16 @@ export default async function handler(req, res) {
     paid: false,
   });
 
-  res.json(OrderInfo);
+  const session = await stripe.checkout.sessions.create({
+    line_items,
+    mode: 'payment',
+    customer_email: email,
+    success_url: process.env.PUBLIC_URL + '/cart?success=1',
+    cancel_url: process.env.PUBLIC_URL + '/cart?canceled=1',
+    metadata: { orderId: OrderInfo?._id.toString(), test: 'ok' },
+  });
+
+  res.json({
+    url: session.url,
+  });
 }
