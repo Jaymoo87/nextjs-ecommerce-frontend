@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 const SInput = styled.input`
   width: 100%;
-  padding: 5px 10px;
+  padding: 5px 15px;
   margin-bottom: 10px;
   border: ${mutedText};
   border-radius: 40px 5px 25px 5px;
