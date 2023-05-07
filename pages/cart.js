@@ -163,13 +163,13 @@ const CartPage = () => {
                         <QuantityLabel>{cartProducts.filter((id) => id === p._id).length}</QuantityLabel>
                         <MainBtn onClick={() => lessOfThisProduct(p._id)}>-</MainBtn>
                       </td>
-                      <td>${cartProducts.filter((id) => id === p._id).length * p.price}</td>
+                      <td>${(cartProducts.filter((id) => id === p._id).length * p.price).toFixed(2)}</td>
                     </tr>
                   ))}
                   <tr>
                     <td></td>
                     <td></td>
-                    <td>${total}</td>
+                    <td>${total.toFixed(2)}</td>
                   </tr>
                 </tbody>
               </Table>
