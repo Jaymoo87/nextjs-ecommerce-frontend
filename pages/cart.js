@@ -72,8 +72,8 @@ const CartPage = () => {
       return;
     }
     if (window?.location.href.includes('success')) {
-      setIsSuccess(true);
       clearCart();
+      setIsSuccess(true);
     }
   }, []);
 
