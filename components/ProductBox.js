@@ -56,7 +56,7 @@ const ProductInfoBox = styled.div`
 
 const ProductBox = ({ _id, description, price, title, images }) => {
   const { addProduct } = useContext(CartContext);
-  const url = `/products/${_id}`;
+  const url = `/product/${_id}`;
 
   return (
     <ProductWrapper>
