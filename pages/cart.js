@@ -68,22 +68,22 @@ const CartPage = () => {
   const [isSuccess, setIsSuccess] = useState(false);
 
   useEffect(() => {
-    if (typeof window === 'undefined') {
-      return;
-    }
-    if (window?.location.href.includes('success')) {
-      clearCart();
-      setIsSuccess(true);
-    }
-  }, []);
-
-  useEffect(() => {
     if (cartProducts.length > 0) {
       axios.post('/api/cart', { ids: cartProducts }).then((res) => setProducts(res.data));
     } else {
       if (cartProducts === 0) {
         setProducts([]);
       }
+    }
+  }, [cartProducts]);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') {
+      return;
+    }
+    if (window?.location.href.includes('success')) {
+      clearCart();
+      setIsSuccess(true);
     }
   }, []);
 
@@ -151,7 +151,7 @@ const CartPage = () => {
                 </thead>
                 <tbody>
                   {products.map((p) => (
-                    <tr>
+                    <tr key={`product-${p._id}`}>
                       <SingleProductInfo>
                         {p.title}
                         <ProductImgBox>

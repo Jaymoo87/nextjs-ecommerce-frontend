@@ -23,7 +23,9 @@ const NewProducts = ({ products }) => {
   return (
     <Center>
       <Title>Latest Additions</Title>
-      <ProductsGrid>{products?.length > 0 && products.map((p) => <ProductBox {...p} />)}</ProductsGrid>
+      <ProductsGrid>
+        {products?.length > 0 && products.map((p) => <ProductBox key={`product-${p._id}`} {...p} />)}
+      </ProductsGrid>
     </Center>
   );
 };
