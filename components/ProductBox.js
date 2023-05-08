@@ -5,15 +5,18 @@ import styled from 'styled-components';
 import MainBtn from './MainBtn';
 import CartIcon from './icons/CartIcon';
 
-import { primary, darkBG } from '@/lib/colors';
+import { primary, darkBG, lightBG } from '@/lib/colors';
 import { CartContext } from './CartContext';
 
 const ProductWrapper = styled.div`
-  background-color: white;
+  box-shadow: ${darkBG} 0px 10px 30px;
+  background-color: ${darkBG};
+  padding: 15px;
+  border-radius: 20px;
 `;
 
 const Box = styled(Link)`
-  box-shadow: ${darkBG} 5px 5px 15px;
+  box-shadow: ${lightBG} 2px 3px 3px;
   background-color: white;
   padding: 20px;
   height: 120px;
@@ -33,20 +36,21 @@ const Title = styled(Link)`
   display: flex;
   justify-content: center;
   color: ${primary};
-  font-weight: light;
-  font-size: 0.8rem;
+  font-weight: bold;
+  font-size: 0.7rem;
   margin-bottom: 5px;
   text-decoration: none;
 `;
 
 const ProductInfoBox = styled.div`
+  background-color: ${darkBG};
   color: ${primary};
   margin-top: 10px;
   align-items: center;
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 1fr 1fr;
   max-width: 100px;
-  margin-left: 20px;
+
   font-weight: 500;
 `;
 
