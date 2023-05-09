@@ -54,7 +54,18 @@ const ProductInfoBox = styled.div`
   font-weight: 500;
 `;
 
-const ProductBox = ({ _id, description, price, title, images }) => {
+const PriceRow = styled.div`
+  display: flex;
+  align-items: center;
+
+  margin-top: 20px;
+
+  @media screen and (min-width: 768px) {
+    display: flex;
+  }
+`;
+
+const ProductBox = ({ _id, price, title, images }) => {
   const { addProduct } = useContext(CartContext);
   const url = `/product/${_id}`;
 
@@ -65,10 +76,11 @@ const ProductBox = ({ _id, description, price, title, images }) => {
         <img src={images[0]} alt="" />
       </Box>{' '}
       <ProductInfoBox>
-        ${price}{' '}
-        <MainBtn onClick={() => addProduct(_id)} size={'sm'}>
-          <CartIcon /> Buy Now
-        </MainBtn>
+        <PriceRow>
+          <MainBtn onClick={() => addProduct(_id)} size={'sm'}>
+            <CartIcon /> Buy Now ${price}
+          </MainBtn>
+        </PriceRow>
       </ProductInfoBox>
     </ProductWrapper>
   );

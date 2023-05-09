@@ -11,12 +11,17 @@ import { CartContext } from './CartContext';
 const BG = styled.div`
   background-color: ${darkBG};
   color: ${primary};
-  padding: 50px 0;
+  padding: 50px;
 `;
 
 const Title = styled.h1`
   margin: 0;
   font-weight: bold;
+  font-size: 1.5rem;
+
+  @media screen and (min-width: 768px) {
+    font-size: 3rem;
+  }
 `;
 
 const DescP = styled.p`
@@ -27,13 +32,29 @@ const DescP = styled.p`
 
 const ColWrapper = styled.div`
   display: grid;
-  grid-template-columns: 0.8fr 1.2fr;
+  grid-template-columns: 1fr;
   gap: 40px;
 
   img {
     max-width: 100%;
+    max-height: 200px;
     border-radius: 2rem;
     box-shadow: ${lightBG} 5px 10px 100px;
+  }
+  div:nth-child(1) {
+    order: 2;
+  }
+  div:nth-child(2) {
+    justify-content: center;
+  }
+  @media screen and (min-width: 768px) {
+    grid-template-columns: 1.1fr 0.9fr;
+    div:nth-child(1) {
+      order: 0;
+    }
+    img {
+      max-width: 100%;
+    }
   }
 `;
 
@@ -67,7 +88,7 @@ const Featured = ({ product }) => {
                 Add To Cart
               </MainBtn>
 
-              <LinkButton href={`/products/${product._id}`} cyan={1}>
+              <LinkButton href={`/product/${product._id}`} cyan={1}>
                 Read More...
               </LinkButton>
             </div>

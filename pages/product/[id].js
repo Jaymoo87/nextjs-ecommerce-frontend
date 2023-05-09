@@ -16,9 +16,16 @@ import { CartContext } from '@/components/CartContext';
 
 const ColWrapper = styled.div`
   display: grid;
-  grid-template-columns: 0.8fr 1.2fr;
+  grid-template-columns: 1fr;
   gap: 40px;
-  margin: 40px 0px 40px 0px;
+  margin: 40px;
+  font-size: large;
+  font-weight: 500;
+
+  @media screen and (min-width: 768px) {
+    grid-template-columns: 0.8fr 1.2fr;
+  }
+
   p {
     color: ${darkText};
   }
@@ -42,7 +49,7 @@ const ProductPage = ({ product }) => {
             <ProductImages images={product.images} />
           </Box>
           <div>
-            <Title>{product.title}</Title>
+            <Title style={{ color: `${primary}` }}>{product.title}</Title>
             <p>{product.description}</p>
             <PriceRow>
               <div>
